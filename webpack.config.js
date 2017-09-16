@@ -22,6 +22,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx', '.less']
   },
+  devtool: 'source-map',
   module: {
     loaders: [
       {
