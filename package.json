@@ -1,0 +1,19 @@
+{
+  "name": "ny-times-article-search",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stoyanova-sm/NY-Times-Article-Search.git"
+  },
+  "author": "Svetlana Timina",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stoyanova-sm/NY-Times-Article-Search/issues"
+  },
+  "homepage": "https://github.com/stoyanova-sm/NY-Times-Article-Search#readme"
+}
