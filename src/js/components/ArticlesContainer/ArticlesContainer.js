@@ -2,9 +2,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Item from '../Item/Item';
+import './ArticleContainer.less';
 
 const mapStateToProps = state => ({
-  articles: state.articles.docs
+  articles: state.articles.articles.docs
 });
 
 

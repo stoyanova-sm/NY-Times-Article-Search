@@ -1,6 +1,6 @@
+// @flow
 import React from 'react';
 import './Header.less';
-import SearchForm from '../SearchForm/SearchForm';
 
 const Header = () => (
   <header>

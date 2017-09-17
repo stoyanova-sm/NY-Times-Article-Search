@@ -31,7 +31,7 @@ class SearchForm extends React.Component {
     handleClick: Function
   };
 
-  handleChange(e: Event) {
+  handleChange(e: SyntheticInputEvent) {
     this.setState({
       value: e.target.value
     });
@@ -40,6 +40,7 @@ class SearchForm extends React.Component {
   handleClick(e: Event) {
     e.preventDefault();
     this.props.handleClick(this.state.value);
+   // history.push('/?search')
   }
 
   render() {
