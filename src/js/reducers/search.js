@@ -1,8 +1,9 @@
 // @flow
-
 import axios from 'axios';
+import Toast from '../components/Toast/Toast';
 
 const GET_ARTICLES_SUCCESS = 'GET_ARTICLES_SUCCESS';
+const GET_ARTICLES_FAILURE = 'GET_ARTICLES_FAILURE';
 
 const initialState = {
   articles: {
@@ -31,7 +32,8 @@ export const getSearchResults = (request: string, page: number = 0) => (dispatch
       });
     })
     .catch((error) => {
-      console.log(error);
+      Toast.createNotification('error', error.message);
+      dispatch({ type: GET_ARTICLES_FAILURE, error });
     })
 ;
 
@@ -43,6 +45,11 @@ const articles = (state: any = initialState, action: ActionType) => {
       return {
         articles: action.articles,
         request: action.request
+      };
+    case GET_ARTICLES_FAILURE:
+      return {
+        state,
+        error: action.error
       };
     default:
       return state;
