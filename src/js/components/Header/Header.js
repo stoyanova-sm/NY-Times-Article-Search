@@ -1,11 +1,14 @@
 import React from 'react';
 import './Header.less';
-import SearchForm from './SearchForm/SearchForm';
+import SearchForm from '../SearchForm/SearchForm';
 
 const Header = () => (
   <header>
-    <h1>Search Articles from The New York Times</h1>
-    <SearchForm />
+    <div>
+      <img src="http://static01.nytimes.com/packages/images/developer/logos/poweredby_nytimes_30a.png" alt="" />
+      <h1>Article Search</h1>
+    </div>
+    <h3>Explore The New York Times</h3>
   </header>
 );
 

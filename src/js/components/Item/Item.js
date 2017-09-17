@@ -17,9 +17,9 @@ const Item = (props: {
 
   return (
     <div className="article">
+      <div className="type">{props.document_type}</div>
       <a href={props.web_url} target="_blank">{props.headline}</a>
       {date && <div className="date">Published: {date.toLocaleString('en-US', options)}</div>}
-      <div className="type">Type: {props.document_type}</div>
     </div>
   );
 };

@@ -2,8 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import './SearchForm.less';
-import { getSearchResults } from '../../../reducers/search';
-
+import { getSearchResults } from '../../reducers/search';
 
 export const mapDispatchToProps = (dispatch: Function) => ({
   handleClick(value: string) {
@@ -38,18 +37,19 @@ class SearchForm extends React.Component {
     });
   }
 
-  handleClick() {
+  handleClick(e: Event) {
+    e.preventDefault();
     this.props.handleClick(this.state.value);
   }
 
   render() {
     return (
-      <div className="searchForm">
+      <form className="searchForm" onSubmit={this.handleClick}>
         <input className="input" type="search" onChange={this.handleChange} />
-        <button className="searchButton" onClick={this.handleClick}>
+        <button type="submit" className="searchButton">
           <i className="fa fa-search searchIcon" aria-hidden="true" />
         </button>
-      </div>
+      </form>
     );
   }
 }
