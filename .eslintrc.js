@@ -1,5 +1,6 @@
 module.exports = {
-"extends": "airbnb",
+  "extends": ["airbnb", "plugin:flowtype/recommended"],
+  "plugins": ["flowtype"],
   "settings": {
     "import/resolver": {
       "webpack": {
@@ -16,5 +17,9 @@ module.exports = {
     "no-console": "warn",
     "linebreak-style": 0
   },
-}
+  "ecmaFeatures": {
+    "jsx": true
+  },
+  "parser": "babel-eslint"
+};
 
