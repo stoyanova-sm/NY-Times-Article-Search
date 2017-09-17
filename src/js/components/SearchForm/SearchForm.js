@@ -47,7 +47,7 @@ class SearchForm extends React.Component {
     return (
       <form className="searchForm" onSubmit={this.handleClick}>
         <input className="input" type="search" onChange={this.handleChange} />
-        <button type="submit" className="searchButton">
+        <button type="submit" className="searchButton" disabled={!this.state.value}>
           <i className="fa fa-search searchIcon" aria-hidden="true" />
         </button>
       </form>

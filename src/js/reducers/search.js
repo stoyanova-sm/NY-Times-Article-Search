@@ -46,11 +46,6 @@ const articles = (state: any = initialState, action: ActionType) => {
         articles: action.articles,
         request: action.request
       };
-    case GET_ARTICLES_FAILURE:
-      return {
-        state,
-        error: action.error
-      };
     default:
       return state;
   }
