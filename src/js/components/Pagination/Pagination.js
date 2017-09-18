@@ -8,7 +8,8 @@ const Pagination = (props: {
   const { number, totalElements, request, onChange } = props;
 
   const currentPage = number + 1;
-  const totalPages = Math.ceil(totalElements / 10);
+  const elements = Math.min(2000, totalElements)
+  const totalPages = Math.ceil(elements / 10);
 
   const setPage = (page: number) => () => {
     if (currentPage === page) return;
@@ -17,6 +18,8 @@ const Pagination = (props: {
 
     if (page < 1) displayPage = 1;
     if (page > totalPages) displayPage = totalPages;
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
 
     onChange(request, displayPage - 1);
   };

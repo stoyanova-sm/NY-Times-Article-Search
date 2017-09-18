@@ -33,7 +33,6 @@ export const getSearchResults = (request: string, page: number = 0) => (dispatch
     })
     .catch((error) => {
       Toast.createNotification('error', error.message);
-      dispatch({ type: GET_ARTICLES_FAILURE, error });
     })
 ;
 
@@ -45,6 +44,12 @@ const articles = (state: any = initialState, action: ActionType) => {
       return {
         articles: action.articles,
         request: action.request
+      };
+    case GET_ARTICLES_FAILURE:
+      return {
+        articles: action.articles,
+        request: action.request,
+        error: action.error
       };
     default:
       return state;
