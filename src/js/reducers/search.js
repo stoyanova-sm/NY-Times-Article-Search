@@ -8,7 +8,8 @@ const GET_ARTICLES_FAILURE = 'GET_ARTICLES_FAILURE';
 const initialState = {
   articles: {
     articles: {},
-    request: ''
+    request: null,
+    page: 0
   }
 };
 
@@ -16,7 +17,8 @@ type ActionType = {
   type: string,
   error: string,
   articles: any,
-  request: string
+  request: string,
+  page: number
 };
 // ------------ ACTION CREATORS --------------
 const url = 'https://api.nytimes.com/svc/search/v2/articlesearch.json';
@@ -28,7 +30,8 @@ export const getSearchResults = (request: string, page: number = 0) => (dispatch
       dispatch({
         type: GET_ARTICLES_SUCCESS,
         articles: response.data.response,
-        request
+        request,
+        page
       });
     })
     .catch((error) => {
@@ -43,7 +46,8 @@ const articles = (state: any = initialState, action: ActionType) => {
     case GET_ARTICLES_SUCCESS:
       return {
         articles: action.articles,
-        request: action.request
+        request: action.request,
+        page: action.page
       };
     case GET_ARTICLES_FAILURE:
       return {

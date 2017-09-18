@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import { history } from '../../configs/configureStore';
 import './Pagination.less';
 
 const Pagination = (props: {
@@ -8,7 +9,7 @@ const Pagination = (props: {
   const { number, totalElements, request, onChange } = props;
 
   const currentPage = number + 1;
-  const elements = Math.min(2000, totalElements)
+  const elements = Math.min(2000, totalElements);
   const totalPages = Math.ceil(elements / 10);
 
   const setPage = (page: number) => () => {
@@ -18,10 +19,13 @@ const Pagination = (props: {
 
     if (page < 1) displayPage = 1;
     if (page > totalPages) displayPage = totalPages;
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
 
     onChange(request, displayPage - 1);
+    if(document.body) {  //eslint-disable-line
+      document.body.scrollTop = 0; //eslint-disable-line
+    }
+
+    history.push(`/search?request=${request}&page=${displayPage}`);
   };
 
   const generatePageMapping = () => {
