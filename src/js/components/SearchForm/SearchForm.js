@@ -9,7 +9,7 @@ import { history } from '../../configs/configureStore';
 const mapDispatchToProps = (dispatch: Function) => ({
   handleClick(value: string) {
     dispatch(
-      getSearchResults(value, 0)
+      getSearchResults(value, 'newest', 0)
     );
   }
 });
@@ -42,7 +42,7 @@ class SearchForm extends React.Component {
   handleClick(e: Event) {
     e.preventDefault();
     this.props.handleClick(this.state.value);
-    history.push(`/search?request=${this.state.value}&page=1`);
+    history.push(`/search?request=${this.state.value}&sort=newest&page=1`);
   }
 
   render() {

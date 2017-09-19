@@ -7,7 +7,14 @@ import rootReducer from '../reducers';
 export const history = createHistory();
 
 export default function configureStore() {
-  const initState = {};
+  const initState = {
+    articles: {
+      articles: {},
+      request: null,
+      page: 0,
+      sort: 'newest'
+    }
+  };
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; //eslint-disable-line
   const enhancers = composeEnhancers(applyMiddleware(thunk, routerMiddleware(history)));
   return createStore(rootReducer, initState, enhancers);

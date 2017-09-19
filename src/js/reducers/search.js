@@ -9,7 +9,8 @@ const initialState = {
   articles: {
     articles: {},
     request: null,
-    page: 0
+    page: 0,
+    sort: 'newest'
   }
 };
 
@@ -18,20 +19,22 @@ type ActionType = {
   error: string,
   articles: any,
   request: string,
-  page: number
+  page: number,
+  sort: string
 };
 // ------------ ACTION CREATORS --------------
 const url = 'https://api.nytimes.com/svc/search/v2/articlesearch.json';
 const apiKey = 'b9940fb00b6a415185f5e3984c660c48';
 
-export const getSearchResults = (request: string, page: number = 0) => (dispatch: Function) =>
-  axios.get(`${url}?api-key=${apiKey}&q=${request}&page=${page}`)
+export const getSearchResults = (request: string, sort: string = 'newest', page: number = 0) => (dispatch: Function) =>
+  axios.get(`${url}?api-key=${apiKey}&q=${request}&sort=${sort}&page=${page}`)
     .then((response) => {
       dispatch({
         type: GET_ARTICLES_SUCCESS,
         articles: response.data.response,
         request,
-        page
+        page,
+        sort
       });
     })
     .catch((error) => {
@@ -47,12 +50,15 @@ const articles = (state: any = initialState, action: ActionType) => {
       return {
         articles: action.articles,
         request: action.request,
-        page: action.page
+        page: action.page,
+        sort: action.sort
       };
     case GET_ARTICLES_FAILURE:
       return {
         articles: action.articles,
         request: action.request,
+        page: action.page,
+        sort: action.sort,
         error: action.error
       };
     default:

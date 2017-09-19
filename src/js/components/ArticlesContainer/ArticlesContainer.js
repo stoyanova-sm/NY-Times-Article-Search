@@ -5,6 +5,7 @@ import queryString from 'query-string';
 import Item from '../Item/Item';
 import './ArticleContainer.less';
 import { getSearchResults } from '../../reducers/search';
+import SortContainer from '../SortContainer/SortContainer';
 
 
 const mapStateToProps = state => ({
@@ -13,20 +14,19 @@ const mapStateToProps = state => ({
 });
 
 export const mapDispatchToProps = (dispatch: Function) => ({
-  getSearchResults: (request: string, page: number = 0) =>
-    dispatch(getSearchResults(request, page))
+  getSearchResults: (request: string, sort: string, page: number = 0) =>
+    dispatch(getSearchResults(request, sort, page))
 });
 
 class ArticlesContainer extends React.Component {
 
   componentDidMount() {
-    let request;
-    let page;
     if (this.props.routeLocation) {
-      request = queryString.parse(this.props.routeLocation.search).request;
-      page = queryString.parse(this.props.routeLocation.search).page;
+      this.request = queryString.parse(this.props.routeLocation.search).request;
+      this.page = queryString.parse(this.props.routeLocation.search).page;
+      this.sort = queryString.parse(this.props.routeLocation.search).sort;
     }
-    this.props.getSearchResults(request, page - 1);
+    this.props.getSearchResults(this.request, this.sort, this.page - 1);
   }
 
   props: {
@@ -39,6 +39,7 @@ class ArticlesContainer extends React.Component {
     const articles = this.props.articles;
     return (
       <div className="articlesContainer">
+        {(articles && articles.length > 1) && <SortContainer />}
         {(articles && articles.length !== 0) && articles.map((article) => {
           const findThumbnail = array => (
             array.find((element) => {

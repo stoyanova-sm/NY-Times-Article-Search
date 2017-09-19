@@ -4,9 +4,9 @@ import { history } from '../../configs/configureStore';
 import './Pagination.less';
 
 const Pagination = (props: {
-  number: number, totalElements: number, request: string, onChange: Function
+  number: number, totalElements: number, request: string, sort: string, onChange: Function
 }) => {
-  const { number, totalElements, request, onChange } = props;
+  const { number, totalElements, request, sort, onChange } = props;
 
   const currentPage = number + 1;
   const elements = Math.min(2000, totalElements);
@@ -20,12 +20,13 @@ const Pagination = (props: {
     if (page < 1) displayPage = 1;
     if (page > totalPages) displayPage = totalPages;
 
-    onChange(request, displayPage - 1);
+    onChange(request, sort, displayPage - 1);
     if(document.body) {  //eslint-disable-line
       document.body.scrollTop = 0; //eslint-disable-line
     }
 
-    history.push(`/search?request=${request}&page=${displayPage}`);
+
+    history.push(`/search?request=${encodeURIComponent(request)}&sort=${sort}&page=${displayPage}`);
   };
 
   const generatePageMapping = () => {
