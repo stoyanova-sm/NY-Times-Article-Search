@@ -10,6 +10,7 @@ import SortContainer from '../SortContainer/SortContainer';
 
 const mapStateToProps = state => ({
   articles: state.articles.articles.docs,
+  meta: state.articles.articles.meta,
   routeLocation: state.routing.location.search
 });
 
@@ -52,14 +53,15 @@ class ArticlesContainer extends React.Component {
   props: {
     routeLocation: string,
     getSearchResults: Function,
-    articles: any
+    articles: any,
+    meta: any
   };
 
   render() {
     const articles = this.props.articles;
     return (
       <div className="articlesContainer">
-        {(articles && articles.length > 1) && <SortContainer />}
+        {(this.props.meta && this.props.meta.hits > 10) && <SortContainer />}
         {(articles && articles.length !== 0) && articles.map((article) => {
           const findThumbnail = array => (
             array.find((element) => {
