@@ -39,6 +39,7 @@ export const getSearchResults = (request: string, sort: string = 'newest', page:
     })
     .catch((error) => {
       Toast.createNotification('error', error.message);
+      dispatch({ type: GET_ARTICLES_FAILURE, error });
     })
 ;
 
@@ -55,10 +56,6 @@ const articles = (state: any = initialState, action: ActionType) => {
       };
     case GET_ARTICLES_FAILURE:
       return {
-        articles: action.articles,
-        request: action.request,
-        page: action.page,
-        sort: action.sort,
         error: action.error
       };
     default:
