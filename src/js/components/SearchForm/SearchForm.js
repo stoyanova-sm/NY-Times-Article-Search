@@ -39,7 +39,7 @@ class SearchForm extends React.Component {
 
   handleClick(e: Event) {
     e.preventDefault();
-    history.push(`/search?request=${this.state.value}&sort=newest&page=1`);
+    history.push(`/search?request=${encodeURIComponent(this.state.value)}&sort=newest&page=1`);
   }
 
   render() {

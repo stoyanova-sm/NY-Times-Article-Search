@@ -48,13 +48,13 @@ class SortContainer extends React.Component {
         <span>Sort by: </span>
         <Link
           className={`${this.state.sort === 'newest' ? 'active' : ''}`}
-          to={`/search?request=${this.props.request}&sort=newest&page=1`}
+          to={`/search?request=${encodeURIComponent(this.props.request)}&sort=newest&page=1`}
           onClick={() => this.handleClick('newest')}
         >Newest</Link>
         <span className="separate">|</span>
         <Link
           className={`${this.state.sort === 'oldest' ? 'active' : ''}`}
-          to={`/search?request=${this.props.request}&sort=oldest&page=1`}
+          to={`/search?request=${encodeURIComponent(this.props.request)}&sort=oldest&page=1`}
           onClick={() => this.handleClick('oldest')}
         >Oldest</Link>
       </div>
