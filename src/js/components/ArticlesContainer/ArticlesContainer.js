@@ -10,7 +10,7 @@ import SortContainer from '../SortContainer/SortContainer';
 
 const mapStateToProps = state => ({
   articles: state.articles.articles.docs,
-  routeLocation: state.routing.location
+  routeLocation: state.routing.location.search
 });
 
 export const mapDispatchToProps = (dispatch: Function) => ({
@@ -19,14 +19,34 @@ export const mapDispatchToProps = (dispatch: Function) => ({
 });
 
 class ArticlesContainer extends React.Component {
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      routeLocation: this.props.routeLocation
+    };
+  }
 
   componentDidMount() {
-    if (this.props.routeLocation) {
-      this.request = queryString.parse(this.props.routeLocation.search).request;
-      this.page = queryString.parse(this.props.routeLocation.search).page;
-      this.sort = queryString.parse(this.props.routeLocation.search).sort;
+    const request = queryString.parse(this.state.routeLocation).request;
+    const page = queryString.parse(this.state.routeLocation).page;
+    const sort = queryString.parse(this.state.routeLocation).sort;
+
+    this.props.getSearchResults(request, sort, page - 1);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.routeLocation !== this.props.routeLocation) {
+      this.setState({
+        routeLocation: nextProps.routeLocation
+      }, () => this.makeRequest());
     }
-    this.props.getSearchResults(this.request, this.sort, this.page - 1);
+  }
+
+  makeRequest() {
+    const request = queryString.parse(this.state.routeLocation).request;
+    const page = queryString.parse(this.state.routeLocation).page;
+    const sort = queryString.parse(this.state.routeLocation).sort;
+    this.props.getSearchResults(request, sort, page - 1);
   }
 
   props: {

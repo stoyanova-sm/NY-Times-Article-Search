@@ -3,19 +3,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import './SortContainer.less';
-import { getSearchResults } from '../../reducers/search';
 
 export const mapStateToProps = (state: Object) => ({
   sort: state.articles.sort,
   request: state.articles.request
-});
-
-export const mapDispatchToProps = (dispatch: Function) => ({
-  onClick(request: string, sort: string) {
-    dispatch(
-      getSearchResults(request, sort, 0)
-    );
-  }
 });
 
 class SortContainer extends React.Component {
@@ -33,22 +24,22 @@ class SortContainer extends React.Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    this.setState({
-      sort: nextProps.sort
-    });
+    if (nextProps !== this.props) {
+      this.setState({
+        sort: nextProps.sort
+      });
+    }
   }
 
   props: {
     sort: string,
     request: string,
-    onClick: Function
   };
 
   handleClick(sort) {
     this.setState({
       sort
     });
-    return this.props.onClick(this.props.request, sort);
   }
 
   render() {
@@ -71,4 +62,4 @@ class SortContainer extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SortContainer);
+export default connect(mapStateToProps)(SortContainer);

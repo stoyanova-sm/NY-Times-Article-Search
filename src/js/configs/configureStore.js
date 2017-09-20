@@ -11,7 +11,6 @@ export default function configureStore() {
     articles: {
       articles: {},
       request: null,
-      page: 0,
       sort: 'newest'
     }
   };
